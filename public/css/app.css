@@ -31175,6 +31175,19 @@ video {
           animation: bounce 1s infinite;
 }
 
+.snap-y {
+  -ms-scroll-snap-type: y mandatory;
+      scroll-snap-type: y mandatory;
+}
+
+.snap-start {
+  scroll-snap-align: start;
+}
+
+.smooth {
+  scroll-behavior: smooth;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

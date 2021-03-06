@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MateriaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('inicio');
-});
+Route::get('/', 'MateriaController@index')->name('materia.index');
+Route::resource('{materia}/', 'ApuntesController')->parameters([
+    '' => 'apuntes'
+]);

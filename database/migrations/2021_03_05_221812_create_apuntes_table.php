@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMateriasTable extends Migration
+class CreateApuntesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateMateriasTable extends Migration
      */
     public function up()
     {
-        Schema::create('materias', function (Blueprint $table) {
+        Schema::create('apuntes', function (Blueprint $table) {
             $table->id();
-            $table->integer('year');
-            $table->string('url');
-            $table->string('materia');
+            $table->integer('numero_tema');
+            $table->string('tema');
+            $table->foreignId('materias_id')->constrained();
+            $table->text('desarrollo');
         });
     }
 
@@ -28,6 +29,6 @@ class CreateMateriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('materias');
+        Schema::dropIfExists('apuntes');
     }
 }
