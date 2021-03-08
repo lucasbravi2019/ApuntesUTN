@@ -16,5 +16,7 @@
             Made by Lucas Bravi
         </footer>
     </div>
+    <script src="https://kit.fontawesome.com/6957f9fdd4.js" crossorigin="anonymous"></script>
+    <script src="/js/app.js"></script>
 </body>
 </html>

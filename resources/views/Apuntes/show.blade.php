@@ -5,12 +5,10 @@
             {{ $materia->materia }}
         @endforeach
     </h1>
-    <nav class="max-w-md mx-auto my-4 text-center">
-        <ul>
-            <a class="p-3 bg-green-500 text-gray-700 rounded-lg mx-1 inline-block font-bold" href="{{ route('index', $url) }}">Volver</a>
-            <a class="p-3 bg-green-500 text-gray-700 rounded-lg mx-1 inline-block font-bold" href="{{ route('materia.index') }}">Inicio</a>
-        </ul>
-    </nav>
-    <h2 class="text-center text-xl font-bold shadow max-w-sm mx-auto p-2">Tema {{ $apunte->numero_tema }}: {{ ucwords($apunte->tema) }}</h2>
-    <p class="shadow-lg max-w-6xl mx-auto my-5 p-5 min-h-screen border border-gray-300">{!! $apunte->desarrollo !!}</p>
+    <a class="p-3 border border-gray-300 my-3 mx-5 text-gray-700 hover:text-white hover:bg-gray-800 rounded-lg inline-block font-bold" href="{{ route('apunte.index', ['carrera' => $carreraSlug, 'materia' => $materiaSlug]) }}"><i class="fas fa-arrow-circle-left"></i> Volver</a>
+    <a class="p-3 border border-gray-300 my-3 mx-5 text-gray-700 hover:text-white hover:bg-gray-800 rounded-lg inline-block font-bold" href="{{ route('index') }}"><i class="fas fa-home"></i> Inicio</a>
+    @foreach ($apuntes as $apunte)
+        <h2 class="text-center text-xl font-bold shadow max-w-sm mx-auto p-2">Tema {{ $apunte->numero_tema }}: {{ ucwords($apunte->tema) }}</h2>
+        <p class="shadow-lg max-w-6xl mx-auto my-5 p-5 min-h-screen border border-gray-300">{!! $apunte->desarrollo !!}</p>
+    @endforeach
 @endsection

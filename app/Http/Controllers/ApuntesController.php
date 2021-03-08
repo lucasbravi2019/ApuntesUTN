@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Apuntes;
+use App\Models\Carrera;
 use App\Models\Materia;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -14,15 +15,14 @@ class ApuntesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($url)
+    public function index($carreraSlug, $materiaSlug)
     {
-        $materias = Materia::where('url', $url)->get();
+        $materias = Materia::where('slug', $materiaSlug)->get();
         foreach($materias as $materia)
         {
-            $materia;
+            $materia->apunte;
         }
-        $apuntes = Apuntes::where('materias_id', $materia->id)->get();
-        return view('Apuntes.index', compact('materia', 'apuntes'));
+        return view('Apuntes.index', compact('materias', 'carreraSlug', 'materiaSlug'));
     }
 
     /**
@@ -30,14 +30,19 @@ class ApuntesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($url)
+    public function create($carreraSlug, $materiaSlug)
     {
-        $materias = Materia::where('url', $url)->get();
+        $carreras = Carrera::where('slug', $carreraSlug)->get();
+        foreach($carreras as $carrera)
+        {
+            $carrera;
+        }
+        $materias = Materia::where('slug', $materiaSlug)->get();
         foreach($materias as $materia)
         {
             $materia;
         }
-        return view('Apuntes.create', compact('materia'));
+        return view('Apuntes.create', compact('carrera', 'materia', 'carreraSlug', 'materiaSlug'));
     }
 
     /**
@@ -46,22 +51,30 @@ class ApuntesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($url,Request $request)
+    public function store($carreraSlug,$materiaSlug, Request $request)
     {
-
+        $carrera = Carrera::where('slug', $carreraSlug)->get();
+        foreach($carrera as $id)
+        {
+            $carrera_id = $id->id;
+        }
         $data = $request->validate([
             'numero_tema' => 'required',
             'tema' => 'required|min:6',
-            'materias_id' => 'required',
+            'materia_id' => 'required',
             'desarrollo' => 'required|min:10'
-        ]);
+            ]);
+        $request->slug = Str::slug($data['tema'], '-');
+        $data['slug'] = $request->slug;
         Apuntes::create([
             'numero_tema' => $data['numero_tema'],
             'tema' => $data['tema'],
-            'materias_id' => $data['materias_id'],
-            'desarrollo' => $data['desarrollo']
+            'carrera_id' => $carrera_id,
+            'materia_id' => $data['materia_id'],
+            'desarrollo' => $data['desarrollo'],
+            'slug' => $data['slug']
         ]);
-        return redirect()->action('ApuntesController@index', $url);
+        return redirect()->action('ApuntesController@index', ['carrera' => $carreraSlug, 'materia' => $materiaSlug]);
     }
 
     /**
@@ -70,18 +83,12 @@ class ApuntesController extends Controller
      * @param  \App\Models\Apuntes  $apuntes
      * @return \Illuminate\Http\Response
      */
-    public function show($url, $tema)
+    public function show($carreraSlug, $materiaSlug, $apunteSlug)
     {
-        $array = explode('-', $tema);
-        $string = implode(' ', $array);
-        $string = ucwords($string);
-        $apuntes = Apuntes::where('tema', $string)->get();
-        foreach($apuntes as $apunte)
-        {
-            $apunte;
-        }
-        $materias = Materia::where('id', $apunte->materias_id)->get();
-        return view('Apuntes.show', compact('apunte','url', 'materias'));
+        $carreras = Carrera::where('slug', $carreraSlug)->get();
+        $materias = Materia::where('slug', $materiaSlug)->get();
+        $apuntes = Apuntes::where('slug', $apunteSlug)->get();
+        return view('Apuntes.show', compact('carreras','materias','apuntes', 'carreraSlug', 'materiaSlug', 'apunteSlug'));
     }
 
     /**

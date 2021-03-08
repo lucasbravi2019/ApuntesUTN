@@ -13,11 +13,17 @@ class CreateMateriasTable extends Migration
      */
     public function up()
     {
+        Schema::create('carreras', function (Blueprint $table) {
+            $table->id();
+            $table->string('carrera');
+            $table->string('slug')->unique();
+        });
         Schema::create('materias', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('carrera_id');
             $table->integer('year');
-            $table->string('url');
             $table->string('materia');
+            $table->string('slug')->unique();
         });
     }
 
@@ -28,6 +34,7 @@ class CreateMateriasTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('carrera');
         Schema::dropIfExists('materias');
     }
 }

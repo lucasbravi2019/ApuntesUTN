@@ -17,8 +17,10 @@ class CreateApuntesTable extends Migration
             $table->id();
             $table->integer('numero_tema');
             $table->string('tema');
-            $table->foreignId('materias_id')->constrained();
+            $table->foreignId('materia_id')->constrained();
+            $table->foreignId('carrera_id')->constrained();
             $table->text('desarrollo');
+            $table->string('slug')->unique();
         });
     }
 

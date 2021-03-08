@@ -3,25 +3,25 @@
 namespace App\Models;
 
 use App\Models\Apuntes;
-use App\Models\Carrera;
+use App\Models\Materia;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Materia extends Model
+class Carrera extends Model
 {
+    protected $fillable = [
+        'carrera' , 'slug'
+    ];
+    public $timestamps = false;
     public function getRouteKeyName()
     {
         return 'slug';
     }
-    public $timestamps = false;
-    protected $fillable = [
-        'carrera_id', 'materia', 'year', 'slug'
-    ];
-    public function carrera()
+    public function materias()
     {
-        return $this->belongsTo(Carrera::class);
+        return $this->hasMany(Materia::class);
     }
-    public function apunte()
+    public function apuntes()
     {
         return $this->hasMany(Apuntes::class);
     }

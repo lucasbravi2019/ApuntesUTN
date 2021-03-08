@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carrera;
 use App\Models\Materia;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class MateriaController extends Controller
@@ -12,10 +14,10 @@ class MateriaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($carreraSlug)
     {
         $materias = Materia::all()->groupBy('year');
-        return view('index', compact('materias'));
+        return view('materias.index', compact('materias', 'carreraSlug'));
     }
     public function sistemas_y_organizaciones($id)
     {
@@ -25,5 +27,46 @@ class MateriaController extends Controller
             $materia;
         }
         return view('sistemas-y-organizaciones', compact('materia'));
+    }
+    public function create($carreraSlug)
+    {
+        $carreras = Carrera::where('slug', $carreraSlug)->get();
+        foreach($carreras as $carrera)
+        {
+            $carrera = $carrera->id;
+        }
+        return view('materias.create', compact('carreraSlug', 'carrera'));
+    }
+    public function edit()
+    {
+
+    }
+    public function show()
+    {
+
+    }
+    public function store(Request $request)
+    {
+        $slug = Str::slug($request->materia, '-');
+        $data = $request->validate([
+            'materia' => 'required',
+            'carrera_id' => 'required',
+            'year' => 'required|max:6'
+        ]);
+        $materia = Materia::create([
+            'carrera_id' => $data['carrera_id'],
+            'materia' => $data['materia'],
+            'year' => $data['year'],
+            'slug' => $slug
+        ]);
+        return redirect()->action('InicioController');
+    }
+    public function update()
+    {
+
+    }
+    public function destroy()
+    {
+
     }
 }

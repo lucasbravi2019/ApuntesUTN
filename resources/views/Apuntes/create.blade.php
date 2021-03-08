@@ -2,10 +2,10 @@
 @section('content')
     <h1 class="bg-indigo-900 text-white text-center font-bold text-2xl p-3">Crear Tema</h1>
     <nav class="max-w-md mx-auto text-center">
-        <a class="bg-green-500 text-gray-800 p-3 inline-block my-5 rounded text-center" href="{{ route('materia.index') }}">Volver</a>
-        <a class="bg-green-500 text-gray-800 p-3 inline-block my-5 rounded text-center" href="{{ route('index', $materia->url) }}">Inicio</a>
+        <a class="border border-gray-300 text-gray-800 hover:bg-gray-800 hover:text-white p-3 inline-block my-5 rounded text-center" href="{{ route('apunte.index', ['carrera' => $carreraSlug, 'materia' => $materiaSlug]) }}"><i class="fas fa-arrow-circle-left"></i> Volver</a>
+        <a class="border border-gray-300 text-gray-800 hover:bg-gray-800 hover:text-white p-3 inline-block my-5 rounded text-center" href="{{ route('index') }}"><i class="fas fa-home"></i> Inicio</a>
     </nav>
-    <form method="post" action="{{ action('ApuntesController@store', $materia->url) }}" class="shadow-md max-w-7xl mx-auto p-5 border border-gray-300">
+    <form method="post" action="{{ action('ApuntesController@store', ['carrera' => $carreraSlug, 'materia' => $materiaSlug]) }}" class="shadow-md max-w-7xl mx-auto p-5 border border-gray-300">
         @csrf
         <div class="grid grid-cols-2 my-2 shadow p-1 border border-gray-300 max-w-md mx-auto px-10">
             <label class="py-1" for="numero_tema">Numero de Tema</label>
@@ -28,7 +28,8 @@
                 <p class="bg-red-500 text-black col-span-4 my-2 mx-5 p-2">{{ $message }}</p>
             @enderror
         </div>
-        <input type="hidden" name="materias_id" value="{{ $materia->id }}">
-        <button type="submit" class="bg-green-500 block p-3 mx-auto rounded-lg mt-5">Guardar</button>
+            <input type="hidden" name="materia_id" value="{{ $materia->id }}">
+            <input type="hidden" name="carrera_id" value="{{ $carrera->id }}">
+        <button type="submit" class="bg-green-500 block p-3 mx-auto rounded-lg mt-5"><i class="far fa-save"></i> Guardar</button>
     </form>
 @endsection

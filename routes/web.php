@@ -13,8 +13,37 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', 'MateriaController@index')->name('materia.index');
-Route::resource('{materia}/', 'ApuntesController')->parameters([
+Route::get('/', 'InicioController')->name('index');
+Route::resource('/carrera', 'CarreraController')->names([
+    'index' => 'carrera.index',
+    'create' => 'carrera.create',
+    'show' => 'carrera.show',
+    'store' => 'carrera.store',
+    'edit' => 'carrera.edit',
+    'update' => 'carrera.update',
+    'destroy' => 'carrera.destroy'
+])->parameters([
+    '' => 'carrera'
+]);
+Route::resource('/carrera/{carrera}/materias', 'MateriaController')->names([
+    'index' => 'materia.index',
+    'create' => 'materia.create',
+    'store' => 'materia.store',
+    'update' => 'materia.update',
+    'destroy' => 'materia.destroy',
+    'edit' => 'materia.edit',
+    'show' => 'materia.show'
+])->parameters([
+    '' => 'materia'
+]);
+Route::resource('/carrera/{carrera}/materias/{materia}/', 'ApuntesController')->names([
+    'index' => 'apunte.index',
+    'create' => 'apunte.create',
+    'show' => 'apunte.show',
+    'edit' => 'apunte.edit' ,
+    'store' => 'apunte.store',
+    'update' => 'apunte.update',
+    'destroy' => 'apunte.destroy'
+])->parameters([
     '' => 'apuntes'
 ]);
