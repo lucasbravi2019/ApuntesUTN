@@ -41,7 +41,7 @@
                                             Tema {{ $apunte->numero_tema }}: {{ $apunte->tema }}
                                         </h5>
                                         <p class="p-3 bg-gray-300 my-3">
-                                            {{ Str::words($apunte->desarrollo, 100) }}
+                                            {!! Str::words($apunte->desarrollo, 100) !!}
                                         </p>
                                         <a class="my-3 block px-5" href="{{ route('apunte.show', ['carrera' => $carrera->slug, 'materia' => $materia->slug, 'apuntes' => $apunte->slug]) }}"><i class="fas fa-book-reader"></i> Leer más</a>
                                     </div>

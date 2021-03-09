@@ -97,9 +97,24 @@ class ApuntesController extends Controller
      * @param  \App\Models\Apuntes  $apuntes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Apuntes $apuntes)
+    public function edit($carreraSlug, $materiaSlug, $apunteSlug)
     {
-        //
+        $carreras = Carrera::where('slug', $carreraSlug)->get();
+        foreach($carreras as $carrera)
+        {
+            $carrera;
+        }
+        $materias = Materia::where('slug', $materiaSlug)->get();
+        foreach($materias as $materia)
+        {
+            $materia;
+        }
+        $apuntes = Apuntes::where('slug', $apunteSlug)->get();
+        foreach($apuntes as $apunte)
+        {
+            $apunte;
+        }
+        return view('Apuntes.edit', compact('carrera', 'materia', 'apunte', 'carreraSlug', 'materiaSlug', 'apunteSlug'));
     }
 
     /**
@@ -109,9 +124,27 @@ class ApuntesController extends Controller
      * @param  \App\Models\Apuntes  $apuntes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Apuntes $apuntes)
+    public function update(Request $request, $carreraSlug, $materiaSlug, $apunteSlug)
     {
-        //
+        $apuntes = Apuntes::where('slug', $apunteSlug)->get();
+        foreach($apuntes as $apunte)
+        {
+            $apunte;
+        }
+        $request->validate([
+            'numero_tema' => 'required',
+            'tema' => 'required|min:5',
+            'desarrollo' => 'required',
+            'materia_id' => 'required',
+            'carrera_id' => 'required'
+        ]);
+        $apunte->numero_tema = $request->numero_tema;
+        $apunte->tema = $request->tema;
+        $apunte->desarrollo = $request->desarrollo;
+        $apunte->materia_id = $request->materia_id;
+        $apunte->carrera_id = $request->carrera_id;
+        $apunte->save();
+        return redirect()->action('ApuntesController@index', ['carrera' => $carreraSlug, 'materia' => $materiaSlug]);
     }
 
     /**
