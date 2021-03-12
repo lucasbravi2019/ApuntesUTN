@@ -1,9 +1,12 @@
 @extends('Layouts.app')
 @section('content')
     <h1 class="bg-indigo-900 text-white text-center font-bold text-2xl p-3">Crear Tema</h1>
-    <nav class="max-w-md mx-auto text-center">
-        <a class="border border-gray-300 text-gray-800 hover:bg-gray-800 hover:text-white p-3 inline-block my-5 rounded text-center" href="{{ route('apunte.index', ['carrera' => $carreraSlug, 'materia' => $materiaSlug]) }}"><i class="fas fa-arrow-circle-left"></i> Volver</a>
-        <a class="border border-gray-300 text-gray-800 hover:bg-gray-800 hover:text-white p-3 inline-block my-5 rounded text-center" href="{{ route('index') }}"><i class="fas fa-home"></i> Inicio</a>
+    <nav class="max-w-md mx-auto text-center grid grid-cols-2">
+        <button-back
+            route="{{ route('apunte.index', ['carrera' => $carreraSlug, 'materia' => $materiaSlug]) }}"
+            button-text="Volver"
+        ></button-back>
+        <button-home></button-home>
     </nav>
     <form method="post" action="{{ action('ApuntesController@store', ['carrera' => $carreraSlug, 'materia' => $materiaSlug]) }}" class="shadow-md max-w-7xl mx-auto p-5 border border-gray-300">
         @csrf

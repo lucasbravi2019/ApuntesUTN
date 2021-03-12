@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
 </head>
 <body>
-    <div class="flex flex-col min-h-screen">
+    <div class="flex flex-col min-h-screen font-sans" id="app">
         <div class="mb-auto">
             @yield('content')
         </div>

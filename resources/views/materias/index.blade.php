@@ -1,14 +1,16 @@
 @extends('Layouts.app')
 @section('content')
-    <h1 class="bg-green-400 text-center text-3xl p-3 font-bold">Apuntes UTN</h1>
-        <a href="{{ route('index') }}" class="block mx-5 w-24 p-2 my-3 hover:bg-gray-800 hover:text-white text-center border border-gray-200"><i class="fas fa-arrow-circle-left"></i> Volver</a>
-        <a href="{{ route('materia.create', ['carrera' => $carreraSlug]) }}" class="block mx-auto w-24 p-2 my-3 hover:bg-gray-800 hover:text-white text-center border border-gray-200"><i class="fas fa-plus"></i> Materia</a>
-    @foreach ($materias as $año => $arrayMaterias)
-        <h3 class="text-center text-lg p-3 font-bold">Año {{ $año }}</h3>
-        <div class="container grid md:grid-cols-2 xl:grid-cols-3 gap-5 w-full mx-auto">
-            @foreach ($arrayMaterias as $materia)
-                <a href="{{ route('apunte.index', ['carrera' => $carreraSlug, 'materia' => $materia->slug]) }}" class="bg-green-300 p-3 w-full text-center rounded font-bold text-gray-800 hover:text-white hover:bg-gray-800">{{ $materia->materia }}</a>
-            @endforeach
+    <h1 class="bg-indigo-900 text-center text-white text-3xl p-3 font-bold">Materias</h1>
+        <button-back route="{{ route('index') }}" button-text="Volver"></button-back>
+        <button-create route="{{ route('materia.create', ['carrera' => $carreraSlug]) }}" button-text="Materia"></button-create>
+        @foreach ($materias as $año => $arrayMaterias)
+        <div class="border border-gray-300 shadow-lg max-w-6xl mx-auto p-5 rounded-lg">
+            <h3 class="text-center text-lg p-3 font-bold">Año {{ $año }}</h3>
+            <div class="container grid md:grid-cols-2 xl:grid-cols-3 gap-5 w-full mx-auto">
+                @foreach ($arrayMaterias as $materia)
+                    <button-materia route="{{ route('apunte.index', ['carrera' => $carreraSlug, 'materia' => $materia->slug]) }}" button-text="{{ $materia->materia }}"></button-materia>
+                @endforeach
+            </div>
         </div>
     @endforeach
 @endsection

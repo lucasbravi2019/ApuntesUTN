@@ -5,10 +5,44 @@
             {{ $materia->materia }}
         @endforeach
     </h1>
-    <a class="p-3 border border-gray-300 my-3 mx-5 text-gray-700 hover:text-white hover:bg-gray-800 rounded-lg inline-block font-bold" href="{{ route('apunte.index', ['carrera' => $carreraSlug, 'materia' => $materiaSlug]) }}"><i class="fas fa-arrow-circle-left"></i> Volver</a>
-    <a class="p-3 border border-gray-300 my-3 mx-5 text-gray-700 hover:text-white hover:bg-gray-800 rounded-lg inline-block font-bold" href="{{ route('index') }}"><i class="fas fa-home"></i> Inicio</a>
+    <div class="grid grid-cols-2 gap-5 max-w-sm ml-10">
+        <button-back
+            route="{{ route('apunte.index', ['carrera' => $carreraSlug, 'materia' => $materiaSlug]) }}"
+            button-text="Volver"
+        ></button-back>
+        <button-home
+            route="{{ route('index') }}"
+            button-text="Inicio"
+        ></button-home>
+    </div>
+    <div class="m-5 max-w-max">
+        <link-route
+        route="{{ route('index') }}"
+        link="Inicio"
+        ></link-route>
+        >
+        <link-route
+            route="{{ route('materia.index', ['carrera' => $carreraSlug]) }}"
+            link="Materias"
+        ></link-route>
+        >
+        <link-route
+            route="{{ route('apunte.index', ['carrera' => $carreraSlug, 'materia' => $materiaSlug]) }}"
+            link="Apuntes"
+        ></link-route>
+    </div>
     @foreach ($apuntes as $apunte)
-        <h2 class="text-center text-xl font-bold shadow max-w-sm mx-auto p-2">Tema {{ $apunte->numero_tema }}: {{ ucwords($apunte->tema) }}</h2>
-        <p class="shadow-lg max-w-6xl mx-auto my-5 p-5 min-h-screen border border-gray-300">{!! $apunte->desarrollo !!}</p>
+        <h2
+            class="text-center text-xl font-bold border border-gray-300 shadow max-w-sm mx-auto p-2"
+        >Tema {{ $apunte->numero_tema }}: {{ ucwords($apunte->tema) }}</h2>
+        <button-edit
+            route="{{ route('apunte.edit', ['carrera' => $carreraSlug, 'materia' => $materia->slug, 'apuntes' => $apunte->slug]) }}"
+            button-text="Editar"
+        ></button-edit>
+        <div class="px-16 py-5 w-full">
+            <text-apunte
+                desarrollo="{{ $apunte->desarrollo }}"
+            ></text-apunte>
+        </div>
     @endforeach
 @endsection
