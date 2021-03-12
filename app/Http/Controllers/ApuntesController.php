@@ -153,8 +153,10 @@ class ApuntesController extends Controller
      * @param  \App\Models\Apuntes  $apuntes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Apuntes $apuntes)
+    public function destroy(Request $request)
     {
-        //
+        $apunte = Apuntes::where('slug', $request->delete);
+        $apunte->delete();
+        return redirect()->back()->with('success', 'Fue borrado con exito');
     }
 }

@@ -21,6 +21,7 @@ class CreateApuntesTable extends Migration
             $table->foreignId('carrera_id')->constrained();
             $table->text('desarrollo');
             $table->string('slug')->unique();
+            $table->softDeletes();
         });
     }
 

@@ -30,6 +30,10 @@ Vue.component('button-show-tema', require('./components/ButtonShowTema.vue').def
 Vue.component('text-apunte', require('./components/TextApunte.vue').default);
 Vue.component('button-materia-index', require('./components/ButtonMateriaIndex.vue').default);
 Vue.component('link-route', require('./components/LinkRoute.vue').default);
+Vue.component('button-delete', require('./components/ButtonDelete.vue').default);
+Vue.component('button-trash', require('./components/ButtonTrash.vue').default);
+Vue.component('element-trashed', require('./components/ElementTrashed.vue').default);
+Vue.component('button-restore', require('./components/ButtonRestore.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

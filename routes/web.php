@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', 'InicioController')->name('index');
+Route::get('/papelera', 'InicioController@destroyed')->name('trashed');
+Route::post('/papelera', 'InicioController@restore')->name('restore');
 Route::resource('/carrera', 'CarreraController')->names([
     'index' => 'carrera.index',
     'create' => 'carrera.create',

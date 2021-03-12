@@ -17,6 +17,7 @@ class CreateMateriasTable extends Migration
             $table->id();
             $table->string('carrera');
             $table->string('slug')->unique();
+            $table->softDeletes();
         });
         Schema::create('materias', function (Blueprint $table) {
             $table->id();
@@ -24,6 +25,7 @@ class CreateMateriasTable extends Migration
             $table->integer('year');
             $table->string('materia');
             $table->string('slug')->unique();
+            $table->softDeletes();
         });
     }
 
