@@ -15,11 +15,17 @@
                 <h2 class="text-center font-bold text-3xl my-4 underline border border-gray-300 rounded-lg p-5 max-w-lg mx-auto bg-indigo-900 text-white">Carrera: {{ $carrera->carrera }}</h2>
                 @if (count($carrera->materias) < 1)
                     <h4 class="text-center font-bold text-lg">No hay materias que mostrar</h4>
-                    <div class="grid grid-cols-2 col-span-2 max-w-max gap-3 mx-auto">
+                    <div class="grid grid-cols-3 col-span-2 max-w-max gap-3 mx-auto">
                         <button-create route="{{ route('materia.create', ['carrera' => $carrera->slug]) }}" button-text="Materia"></button-create>
                         <button-trash
                             route="{{ route('trashed') }}"
                         ></button-trash>
+                        <form action="{{ action('CarreraController@destroy', ['carrera' => $carrera->slug]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="delete" value="{{ $carrera->slug }}">
+                            <button-delete></button-delete>
+                        </form>
                     </div>
                 @else
                     <button-materia
@@ -36,6 +42,14 @@
                                 year="{{ $materia->year }}"
                             ></button-materia-index>
                             @if (count($materia->apunte) < 1)
+                                <div class="col-span-2">
+                                    <form action="{{ action('MateriaController@destroy', ['carrera' => $carrera->slug, 'materia' => $materia->slug]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="delete" value="{{ $materia->slug }}">
+                                        <button-delete></button-delete>
+                                    </form>
+                                </div>
                                 <p class="text-center col-span-2 font-bold text-md">No hay apuntes que mostrar</p>
                                 <div class="grid grid-cols-2 col-span-2 max-w-max gap-3 mx-auto">
                                     <button-create route="{{ route('apunte.create', ['carrera' => $carrera->slug, 'materia' => $materia->slug]) }}" button-text="Apunte"></button-create>

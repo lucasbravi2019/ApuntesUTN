@@ -89,8 +89,10 @@ class CarreraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $carrera = Carrera::where('slug', $request->delete);
+        $carrera->delete();
+        return redirect()->action('InicioController');
     }
 }

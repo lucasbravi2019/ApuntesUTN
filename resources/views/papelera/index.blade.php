@@ -12,9 +12,17 @@
             ></element-trashed>
         @else
             @foreach ($carreras as $carrera)
-                <element-trashed
-                    nombre="{{ $carrera->carrera }}"
-                ></element-trashed>
+                <form action="{{ action('InicioController@restore') }}" method="POST">
+                    @csrf
+                    <div class="grid grid-cols-2">
+                        <element-trashed
+                            nombre="{{ $carrera->carrera }}"
+                        ></element-trashed>
+                        <input type="hidden" name="elemento" value="carrera">
+                        <input type="hidden" name="elemento_slug" value="{{ $carrera->slug }}">
+                        <button-restore></button-restore>
+                    </div>
+                </form>
 
             @endforeach
         @endif
@@ -24,9 +32,17 @@
             ></element-trashed>
         @else
             @foreach ($materias as $materia)
-                <element-trashed
-                    nombre="{{ $materia->materia }}"
-                ></element-trashed>
+                <form action="{{ action('InicioController@restore') }}" method="POST">
+                    @csrf
+                    <div class="grid grid-cols-2">
+                        <input type="hidden" name="elemento" value="materia">
+                        <input type="hidden" name="elemento_slug" value="{{ $materia->slug }}">
+                        <element-trashed
+                            nombre="{{ $materia->materia }}"
+                        ></element-trashed>
+                        <button-restore></button-restore>
+                    </div>
+                </form>
             @endforeach
         @endif
         @if (count($apuntes) < 1)

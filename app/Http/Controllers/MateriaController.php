@@ -65,8 +65,10 @@ class MateriaController extends Controller
     {
 
     }
-    public function destroy()
+    public function destroy(Request $request)
     {
-
+        $materia = Materia::where('slug',  $request->delete);
+        $materia->delete();
+        return redirect()->action('InicioController');
     }
 }
