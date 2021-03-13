@@ -1,3 +1,50 @@
+<h1> First steps into Laravel project </h1>
+<ul>
+    <li> Install <a href="https://chocolatey.org/install">Chocolatey</a> </li>
+    <li>
+        <div>
+            <p>Install PHP with powershell(Windows)</p>
+            <p> choco install php </p>
+            <p> Add php system variable (example: C:\tools\php74) </p>
+        </div>
+    </li>
+    <li> Install <a href="https://dev.mysql.com/downloads/installer/">MySQL</a> </li>
+    <li> Install tables for MySQL - <a href="https://tableplus.com/windows">Table Plus</a>
+    <li> 
+        <div>
+            <p> Install nodejs with chocolatey(powershell) </p>
+            <p> choco install nodejs.install </p>
+        </div>
+    </li>
+    <li> 
+        <div>
+            <p> Install Composer with chocolatey (powershell) </p>
+            <p> choco install composer </p>
+        </div>
+    </li>
+    <li> 
+        <p> Navigate to desired folder and clone repository with powershell </p>
+        <p> cd C:\Users\MyUser\Desktop\ProjectFolder </p>
+        <p> git clone https://github.com/lucasbravi2019/ApuntesUTN </p>
+    </li>
+    <li> 
+        <p> Navigate inside cloned folder with powershell </p>
+        <p> cd C:\Users\MyUser\Desktop\ProjectFolder\ApuntesUTN </p>
+        <p> composer install </p>
+        <p> npm install </p>
+        <p> cp .env.example .env </p
+        <p> php artisan key:generate </p>
+    </li>
+    <li> Modify .env file with your project name, and your database username and password </li>
+    <li> 
+        <p> Run migrations for database </p>
+        <p> php artisan migrate:fresh </p>
+    </li>
+</ul>
+<h2> Start server with php artisan serve and enjoy your university notes </h2>
+    
+    
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
